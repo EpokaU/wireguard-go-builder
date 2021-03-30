@@ -6,7 +6,7 @@ Compiling the [wireguard-go](https://git.zx2c4.com/wireguard-go/) binary from so
 
 The latest version of the binary can be downloaded by clicking on the following link.
 
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/P3TERX/wireguard-go-builder?style=for-the-badge&label=Download)](https://github.com/P3TERX/wireguard-go-builder/releases/latest)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/P3TERX/wireguard-go-builder?style=for-the-badge&label=Download)](https://github.com/EpokaU/wireguard-go-builder/releases/latest)
 
 ## Install
 
