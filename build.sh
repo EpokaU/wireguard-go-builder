@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ref: https://github.com/AlexanderOMara/wireguard-go-builds/blob/master/build.sh
-#
+
 set -e
 set -u
 
