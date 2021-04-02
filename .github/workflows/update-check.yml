@@ -2,8 +2,8 @@ name: Update Check
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: 45 12 * * *
+  #schedule:
+   # - cron: 45 12 * * *
 
 jobs:
   check:
