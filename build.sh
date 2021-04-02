@@ -4,7 +4,7 @@
 set -e
 set -u
 
-version="${WGGO_VERSION}"
+version=0.0.20210323
 
 src_file="wireguard-go-${version}.tar.xz"
 src_url="https://git.zx2c4.com/wireguard-go/snapshot/${src_file}"
