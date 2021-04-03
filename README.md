@@ -11,6 +11,7 @@ The latest version of the binary can be downloaded by clicking on the following 
 
 ## Install
 
+
 You can easily use a one-click script to automatically install to your Linux device:
 
 ```
